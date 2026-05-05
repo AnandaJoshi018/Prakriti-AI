@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Newsreader", ui-serif, Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-pa-cream: #faf9e6;
+  --color-pa-cream-2: #fcfaf2;
+  --color-pa-cream-3: #fdfceb;
+  --color-pa-cream-login: #f9f9e9;
+  --color-pa-cream-card: #f2f1df;
+  --color-pa-input: #e6e4d1;
+  --color-pa-input-2: #ebe9db;
+  --color-pa-signup-input: #f1f3d8;
+  --color-pa-green: #14532d;
+  --color-pa-green-2: #1b4332;
+  --color-pa-green-3: #1a522a;
+  --color-pa-green-deep: #2d6a4f;
+  --color-pa-green-signup: #2d4f1e;
+  --color-pa-slate: #4a628a;
+  --color-pa-slate-2: #4a658a;
+  --color-pa-slate-3: #5b7083;
+  --color-pa-slate-4: #4a678c;
+  --color-pa-beige-card: #f3f2e0;
+  --color-pa-beige-soft: #f2f1e6;
+  --color-pa-tag: #e8efd6;
+  --color-pa-sage: #f2f4e8;
+  --color-pa-sage-2: #e9efd1;
+  --color-pa-gold: #c5a358;
+  --color-pa-gold-soft: #8d6e63;
+  --color-pa-brown: #6b5b12;
+  --color-pa-brown-2: #7b5e0b;
+  --color-pa-muted: #5c5c5c;
+  --color-pa-shell: #f9f9e8;
+  --color-pa-shell-2: #fcfdf5;
+  --color-pa-result-bg: #f9f9e0;
+  --color-pa-sidebar: #f9faf0;
+  --color-pa-rec-bg: #f9faf2;
+}
+
+@layer base {
+  html {
+    @apply antialiased;
+    font-family: var(--font-sans);
+  }
+  body {
+    @apply m-0 min-h-screen text-pa-muted;
+  }
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+}
