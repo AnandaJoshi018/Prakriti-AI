@@ -6,17 +6,23 @@ import '../styles/App.css'
 
 export default function SignupPage() {
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#f9f9e6]">
+    <div className="relative flex min-h-screen w-full flex-col bg-[#f9f9e6]">
       <div className="pa-leaf-bg" aria-hidden />
-      <Navbar variant="signup" />
-      <main className="relative z-[1] flex-1 px-6 py-10 md:px-10 lg:px-14">
-        <div className="mx-auto grid max-w-[1320px] items-start gap-12 lg:grid-cols-2 lg:gap-16">
-          <HeroSection variant="signupLeft" />
-          <div className="flex justify-center lg:justify-end">
-            <SignupForm />
+      
+      {/* First Screen (Primary Content) */}
+      <div className="flex min-h-screen flex-col lg:h-screen lg:min-h-[620px] w-full">
+        <Navbar variant="signup" />
+        <main className="relative z-[1] flex flex-1 items-center px-4 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12 lg:pb-8">
+          <div className="pa-responsive-shell mx-auto grid w-full items-center gap-5 lg:grid-cols-[1fr_1fr] lg:gap-8 xl:gap-10">
+            <HeroSection variant="signupLeft" />
+            <div className="flex justify-center lg:justify-end">
+              <SignupForm />
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
+
+      {/* Secondary Content */}
       <Footer variant="authSignup" />
     </div>
   )

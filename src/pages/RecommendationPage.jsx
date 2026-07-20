@@ -1,4 +1,5 @@
-
+import { useState } from 'react'
+import { Menu } from 'lucide-react'
 import Footer from '../components/Footer.jsx'
 import DashboardSidebar from '../components/DashboardSidebar.jsx'
 import {
@@ -10,15 +11,35 @@ import {
 import '../styles/App.css'
 
 export default function RecommendationPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+
   return (
-    <div className="flex min-h-screen flex-col bg-pa-rec-bg">
-      <div className="flex min-h-0 flex-1 flex-col lg:flex-row">
-        <DashboardSidebar active="recommendation" consultVariant="slate" />
+    <div className="flex min-h-screen flex-col bg-pa-rec-bg overflow-x-hidden">
+      <div className="flex min-h-0 flex-1 flex-col md:flex-row lg:flex-row">
+        <DashboardSidebar
+          active="recommendation"
+          consultVariant="slate"
+          isOpen={sidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+        />
         <div className="flex min-w-0 flex-1 flex-col">
+          {/* Mobile Header Bar */}
+          <div className="flex items-center justify-between border-b border-black/5 bg-pa-sidebar px-5 py-4 md:hidden">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="rounded-lg p-1.5 hover:bg-black/[0.03]"
+              aria-label="Open Navigation"
+            >
+              <Menu className="h-5 w-5 text-pa-green-2" />
+            </button>
+            <span className="font-sans text-sm font-bold tracking-[0.12em] text-pa-green-2">
+              PRAKRITI AI
+            </span>
+            <div className="w-8" />
+          </div>
+
           <div className="px-4 pb-10 pt-5 md:px-6 lg:px-8">
-
-
-            <div className="relative mt-10 overflow-hidden rounded-[24px]">
+            <div className="relative mt-6 lg:mt-10 overflow-hidden rounded-[24px]">
               <div className="pa-leaf-watermark-lg" aria-hidden />
               <div className="relative">
                 <span className="inline-flex rounded-full bg-pa-green-3 px-4 py-1.5 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-white">

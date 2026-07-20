@@ -33,18 +33,18 @@ export default function Footer({ variant = 'marketing' }) {
 
   if (variant === 'authSignup') {
     return (
-      <footer className="relative z-10 mt-auto border-t border-black/10 px-6 py-10 md:px-10 lg:px-14">
+      <footer className="relative z-10 mt-auto border-t border-black/10 px-4 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12 overflow-hidden">
         <div className="pa-footer-leaf" aria-hidden />
-        <div className="relative mx-auto flex max-w-[1320px] flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="relative mx-auto flex max-w-[1320px] flex-col gap-2 md:flex-row md:items-end md:justify-between md:gap-4">
           <div>
             <p className="font-sans text-sm font-bold tracking-[0.12em] text-pa-green-signup">
               PRAKRITI AI
             </p>
-            <p className="mt-2 font-sans text-xs text-[#8a9585]">
+            <p className="mt-1 font-sans text-[11px] text-[#8a9585]">
               © 2024 PRAKRITI AI - The Botanical Algorithm
             </p>
           </div>
-          <div className="flex flex-wrap gap-6 font-sans text-xs text-[#7a8578]">
+          <div className="flex flex-wrap gap-4 font-sans text-[11px] text-[#7a8578]">
             {linksAlt.map((l) => (
               <Link key={l.to} to={l.to} className="transition hover:text-pa-green-signup">
                 {l.label}

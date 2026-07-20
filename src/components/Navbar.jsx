@@ -26,8 +26,8 @@ export default function Navbar({
 }) {
   if (variant === 'signup') {
     return (
-      <header className="relative z-10 w-full px-6 py-6 md:px-10 lg:px-14">
-        <div className="mx-auto flex max-w-[1320px] items-center justify-between">
+      <header className="relative z-10 w-full px-5 py-5 sm:px-6 md:px-8 lg:px-10 xl:px-14">
+        <div className="pa-responsive-shell mx-auto flex items-center justify-between">
           <Link
             to="/"
             className="font-sans text-[0.95rem] font-bold tracking-[0.12em] text-pa-green-signup"
@@ -91,8 +91,8 @@ export default function Navbar({
   }
 
   return (
-    <header className="relative z-10 w-full px-6 py-6 md:px-10 lg:px-14">
-      <div className="mx-auto flex max-w-[1320px] flex-wrap items-center justify-between gap-6">
+    <header className="relative z-10 w-full px-5 py-5 sm:px-6 md:px-8 lg:px-10 xl:px-14">
+      <div className="pa-responsive-shell mx-auto flex flex-wrap items-center justify-between gap-4 sm:gap-6">
         <Link
           to="/"
           className="font-serif text-lg font-bold tracking-[0.08em] text-pa-green md:text-xl"

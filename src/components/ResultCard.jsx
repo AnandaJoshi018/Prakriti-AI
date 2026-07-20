@@ -10,7 +10,7 @@ function DominantCard() {
         <span className="font-sans text-[10px] font-bold uppercase tracking-wide">Dominant Energy</span>
       </div>
       <h2 className="relative mt-6 font-serif text-[2.75rem] font-bold leading-none text-pa-green-2 md:text-[3.25rem]">
-        Pitta-Vata
+        Pitta
       </h2>
       <p className="relative mt-4 max-w-md font-sans text-sm leading-relaxed text-[#4f5f4f]">
         You possess the fiery intellect of Pitta combined with the creative agility of Vata.
