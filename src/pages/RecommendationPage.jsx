@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Menu } from 'lucide-react'
 import Footer from '../components/Footer.jsx'
 import DashboardSidebar from '../components/DashboardSidebar.jsx'
@@ -8,10 +8,38 @@ import {
   EveningRoutineCard,
   MentalHygieneCard,
 } from '../components/RecommendationCard.jsx'
+import { listPredictions } from '../services/api.js'
 import '../styles/App.css'
 
 export default function RecommendationPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [prediction, setPrediction] = useState(() => {
+    const stored = localStorage.getItem('latest_prediction')
+    try {
+      return stored ? JSON.parse(stored) : null
+    } catch {
+      return null
+    }
+  })
+
+  useEffect(() => {
+    async function loadLatest() {
+      try {
+        const list = await listPredictions()
+        if (list && list.length > 0) {
+          setPrediction(list[0])
+          localStorage.setItem('latest_prediction', JSON.stringify(list[0]))
+        }
+      } catch (err) {
+        console.error('Failed to load predictions:', err)
+      }
+    }
+    loadLatest()
+  }, [])
+
+  const dominantDosha = useMemo(() => {
+    return prediction?.dominant_dosha || 'Pitta'
+  }, [prediction])
 
   return (
     <div className="flex min-h-screen flex-col bg-pa-rec-bg overflow-x-hidden">
@@ -57,19 +85,19 @@ export default function RecommendationPage() {
               </span>
               <p className="mt-3 font-sans text-sm text-[#4a4a3a] md:mt-0">
                 Current Constitution: Selected for your{' '}
-                <span className="font-bold text-pa-green-3">PITTA</span> constitution
+                <span className="font-bold text-pa-green-3">{dominantDosha.toUpperCase()}</span> constitution
               </p>
             </div>
 
             <div className="mt-10 grid gap-5 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:grid-rows-[auto_auto]">
               <div className="lg:row-span-2">
-                <DietaryProtocolCard />
+                <DietaryProtocolCard recommendations={prediction?.recommendations} dominantDosha={dominantDosha} />
               </div>
               <div className="lg:row-span-2">
-                <MovementCard />
+                <MovementCard recommendations={prediction?.recommendations} dominantDosha={dominantDosha} />
               </div>
-              <EveningRoutineCard />
-              <MentalHygieneCard />
+              <EveningRoutineCard recommendations={prediction?.recommendations} dominantDosha={dominantDosha} />
+              <MentalHygieneCard recommendations={prediction?.recommendations} dominantDosha={dominantDosha} />
             </div>
 
           </div>

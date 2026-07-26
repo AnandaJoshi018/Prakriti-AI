@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "doshas": {
+    "Vata": {
+      "diet": "Favor warm, moist, grounding, and nourishing foods. Eat at regular times and prefer cooked meals over raw or cold foods.",
+      "foods_to_eat": "Warm soups, stews, cooked grains (rice, oats), root vegetables, ghee, nuts (soaked), sweet fruits (bananas, mangoes), dairy (warm milk), spices (ginger, cumin, cinnamon).",
+      "foods_to_avoid": "Raw salads, cold beverages, dry crackers, excessive beans, bitter/astringent foods, frozen foods, caffeine in excess, irregular fasting.",
+      "herbs": "Ashwagandha, Shatavari, Triphala (in moderation), Brahmi, Licorice root — consult an Ayurvedic practitioner for dosage.",
+      "yoga": "Gentle Hatha, restorative yoga, slow Sun Salutations, grounding poses (Child's Pose, Mountain Pose, seated forward folds). Avoid excessive fast vinyasa.",
+      "lifestyle": "Maintain regular daily routines (dinacharya). Stay warm, avoid excessive travel or overstimulation. Practice oil massage (Abhyanga) with sesame oil.",
+      "daily_routine": "Wake before 6 AM, warm oil self-massage, warm breakfast by 8 AM, light exercise mid-morning, warm dinner before 7 PM, early bedtime by 10 PM.",
+      "morning_routine": "Wake before 6 AM, drink warm water, practice gentle stretching, and apply warm sesame oil.",
+      "evening_routine": "Warm oil self-massage (Abhyanga) with sesame oil. Screen-free wind-down with warm herbal tea (Chamomile or Nutmeg milk) before bed.",
+      "hydration": "Drink warm or room-temperature water throughout the day. Herbal teas with ginger or cumin aid digestion. Avoid ice-cold drinks.",
+      "sleep": "Aim for 7–8 hours with a consistent bedtime. Use warm milk with nutmeg before sleep. Keep bedroom warm and quiet.",
+      "mental_hygiene": "Calm the active mind through slow paced breathing, mindfulness practice, and regular journaling. Vata types benefit from grounding routines, reducing sensory inputs, and avoiding multitasking.",
+      "stress_management": "Practice slow, deep breathing (Nadi Shodhana), meditation, gentle walks in nature. Avoid multitasking and sensory overload.",
+      "wellness_tips": "Keep warm, maintain a consistent schedule, and prioritize nourishment and quiet self-care."
+    },
+    "Pitta": {
+      "diet": "Favor cooling, sweet, bitter, and astringent tastes. Avoid excessive spicy, sour, salty, and fried foods. Eat in a calm environment.",
+      "foods_to_eat": "Sweet fruits (melons, grapes, pears), leafy greens, cucumber, coconut, basmati rice, barley, milk, ghee (moderate), coriander, fennel, mint.",
+      "foods_to_avoid": "Chili peppers, vinegar, fermented foods, alcohol, red meat, fried foods, excessive sour foods (tomatoes, citrus in excess), hot spices.",
+      "herbs": "Amalaki, Guduchi, Neem, Brahmi, Shatavari, Coriander — use under guidance for Pitta-balancing formulations.",
+      "yoga": "Moon Salutations (Chandra Namaskar), cooling poses (Pigeon, Fish, Cobra gently), forward bends, Savasana. Practice in early morning or evening.",
+      "lifestyle": "Avoid excessive heat and sun exposure. Engage in non-competitive activities. Take breaks from intense work. Spend time near water or in nature.",
+      "daily_routine": "Wake around 6 AM, cooling shower, light breakfast, work with scheduled breaks, cooling walk at dusk, dinner before sunset when possible, sleep by 10:30 PM.",
+      "morning_routine": "Wake around 6 AM, cooling shower, light breakfast, and start the day without rushing.",
+      "evening_routine": "Cool oil massage (Abhyanga) with coconut or sunflower. Screen-free wind-down for 45 minutes before sleep.",
+      "hydration": "Drink cool (not ice-cold) water with mint or cucumber. Coconut water is excellent. Avoid hot beverages in excess during summer.",
+      "sleep": "7–8 hours in a cool, well-ventilated room. Avoid stimulating screens before bed. Moonlit walks promote calm sleep.",
+      "mental_hygiene": "Cultivate patience through paced breathing, reflective journaling, and meditation. Avoid heated arguments and competitive environments.",
+      "stress_management": "Cultivate patience through paced breathing, reflective journaling, and meditation. Avoid heated arguments and competitive environments.",
+      "wellness_tips": "Avoid excessive heat, take scheduled breaks from intense work, and stay hydrated."
+    },
+    "Kapha": {
+      "diet": "Favor light, warm, dry, and pungent foods. Reduce heavy, oily, sweet, and cold foods. Eat the largest meal at midday.",
+      "foods_to_eat": "Light grains (millet, barley, quinoa), steamed vegetables, legumes (lentils, mung beans), honey, ginger, turmeric, leafy greens, astringent fruits (apples, berries).",
+      "foods_to_avoid": "Heavy dairy, fried foods, excessive sweets, cold foods, excessive nuts, red meat, wheat in large quantities, daytime napping after heavy meals.",
+      "herbs": "Trikatu, Punarnava, Guggulu, Tulsi, Ginger, Turmeric — support metabolism and reduce Kapha stagnation.",
+      "yoga": "Energizing practices: Sun Salutations, standing poses, backbends, Kapalabhati pranayama. Practice in morning with vigor to stimulate circulation.",
+      "lifestyle": "Stay active throughout the day. Avoid oversleeping and sedentary habits. Seek variety and new experiences. Reduce daytime naps.",
+      "daily_routine": "Wake before 6 AM (avoid sleeping past sunrise), dry brushing, vigorous exercise, light breakfast, main meal at noon, light dinner before 7 PM, bed by 10 PM.",
+      "morning_routine": "Wake before 6 AM (avoid sleeping past sunrise), dry brushing, vigorous exercise, and a light breakfast.",
+      "evening_routine": "Light walk after dinner, warm cup of tulsi tea, and avoid heavy late-night snacking.",
+      "hydration": "Warm water with ginger and honey. Avoid excessive cold or sweet drinks. Herbal teas with ginger, cinnamon, or clove.",
+      "sleep": "6–7 hours is sufficient. Avoid sleeping during the day. Wake early to maintain lightness and energy.",
+      "mental_hygiene": "Stimulate energy and motivation through creative projects, physical activity, and social connections. Kapha types benefit from shaking up routines, avoiding stagnation, and waking up early.",
+      "stress_management": "Stay engaged with stimulating activities, social connection, and creative pursuits. Avoid isolation and lethargy.",
+      "wellness_tips": "Stay active, seek variety and new experiences, and avoid sleeping during the day."
+    }
+  }
+}

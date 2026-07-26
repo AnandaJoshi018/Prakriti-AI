@@ -1,0 +1,25 @@
+# Environment and local configuration
+.env
+.venv/
+__pycache__/
+*.py[cod]
+
+# Runtime data
+uploads/*
+!uploads/.gitkeep
+trained_models/*
+!trained_models/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+
+# Data is supplied locally and must not be committed accidentally.
+datasets/*
+!datasets/.gitkeep
+
+# Test and tool artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/

@@ -1,19 +1,40 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { User, Mail, Lock, ShieldCheck } from 'lucide-react'
+import { registerUser, setStoredToken } from '../services/api.js'
 
 export default function SignupForm() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (name.trim() && email.trim() && password.trim() && confirmPassword.trim()) {
-      // Basic validation: ignore if password and confirm password don't match or fields are empty
+    if (!name.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
+      setErrorMessage('Please fill out all the fields before continuing.')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      setErrorMessage('Passwords do not match. Please try again.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setErrorMessage('')
+
+    try {
+      const response = await registerUser({ full_name: name.trim(), email: email.trim(), password })
+      setStoredToken(response.access_token)
       navigate('/dashboard')
+    } catch (error) {
+      setErrorMessage(error.message || 'Unable to create your account right now.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -86,11 +107,15 @@ export default function SignupForm() {
             </div>
           </div>
         </div>
+        {errorMessage ? (
+          <p className="font-sans text-xs font-semibold text-[#a3522b]">{errorMessage}</p>
+        ) : null}
         <button
           type="submit"
-          className="mt-1 w-full rounded-xl bg-[#46608c] py-2.5 sm:py-3 font-sans text-sm font-semibold text-white shadow-md transition hover:bg-[#3d5478]"
+          disabled={isSubmitting}
+          className="mt-1 w-full rounded-xl bg-[#46608c] py-2.5 sm:py-3 font-sans text-sm font-semibold text-white shadow-md transition hover:bg-[#3d5478] disabled:cursor-not-allowed disabled:opacity-70"
         >
-          Create Account →
+          {isSubmitting ? 'Creating account...' : 'Create Account →'}
         </button>
       </form>
 

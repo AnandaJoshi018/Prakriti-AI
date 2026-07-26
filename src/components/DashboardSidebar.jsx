@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
-import { LayoutGrid, PlusSquare, BarChart3, Leaf, Sparkles, X } from 'lucide-react'
+import { LayoutGrid, PlusSquare, BarChart3, Leaf, Sparkles, X, History } from 'lucide-react'
 
 const items = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutGrid, key: 'dashboard' },
   { to: '/dashboard', label: 'Symptoms', icon: PlusSquare, key: 'symptoms' },
   { to: '/result', label: 'Dosha Analysis', icon: BarChart3, key: 'result' },
   { to: '/recommendation', label: 'Recommendations', icon: Leaf, key: 'recommendation' },
+  { to: '/history', label: 'History', icon: History, key: 'history' },
 ]
 
 export default function DashboardSidebar({ active = 'dashboard', consultVariant = 'gold', isOpen = false, onClose }) {

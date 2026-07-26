@@ -1,16 +1,33 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AtSign, Lock, Apple } from 'lucide-react'
+import { loginUser, setStoredToken } from '../services/api.js'
 
 export default function LoginForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (email.trim() && password.trim()) {
+    if (!email.trim() || !password.trim()) {
+      setErrorMessage('Please complete both fields before continuing.')
+      return
+    }
+
+    setIsSubmitting(true)
+    setErrorMessage('')
+
+    try {
+      const response = await loginUser({ email: email.trim(), password })
+      setStoredToken(response.access_token)
       navigate('/dashboard')
+    } catch (error) {
+      setErrorMessage(error.message || 'Unable to sign in right now.')
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -66,11 +83,15 @@ export default function LoginForm() {
             FORGOT?
           </button>
         </div>
+        {errorMessage ? (
+          <p className="font-sans text-xs font-semibold text-[#a3522b]">{errorMessage}</p>
+        ) : null}
         <button
           type="submit"
-          className="w-full rounded-xl bg-pa-slate py-2.5 sm:py-3 font-sans text-sm font-semibold text-white shadow-[0_10px_24px_rgba(74,98,138,0.35)] transition hover:bg-[#3f5372] cursor-pointer"
+          disabled={isSubmitting}
+          className="w-full rounded-xl bg-pa-slate py-2.5 sm:py-3 font-sans text-sm font-semibold text-white shadow-[0_10px_24px_rgba(74,98,138,0.35)] transition hover:bg-[#3f5372] cursor-pointer disabled:cursor-not-allowed disabled:opacity-70"
         >
-          Login →
+          {isSubmitting ? 'Signing in...' : 'Login →'}
         </button>
       </form>
 
