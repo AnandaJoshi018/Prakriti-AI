@@ -18,7 +18,10 @@ def _load_rules() -> dict:
 
 def get_recommendations(dominant_dosha: str) -> RecommendationBlock:
     rules = _load_rules()
-    dosha_rules = rules["doshas"].get(dominant_dosha)
+    key = dominant_dosha
+    if key.endswith(" Blend"):
+        key = key[:-6]
+    dosha_rules = rules["doshas"].get(key)
     if not dosha_rules:
         dosha_rules = rules["doshas"]["Vata"]
     return RecommendationBlock(**dosha_rules)

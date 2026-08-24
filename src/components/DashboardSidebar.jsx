@@ -1,5 +1,7 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { LayoutGrid, PlusSquare, BarChart3, Leaf, Sparkles, X, History } from 'lucide-react'
+import AyurvedaChatbot from './AyurvedaChatbot.jsx'
 
 const items = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutGrid, key: 'dashboard' },
@@ -11,6 +13,7 @@ const items = [
 
 export default function DashboardSidebar({ active = 'dashboard', consultVariant = 'gold', isOpen = false, onClose }) {
   const resolvedActive = active
+  const [isChatOpen, setIsChatOpen] = useState(false)
 
   return (
     <>
@@ -83,9 +86,13 @@ export default function DashboardSidebar({ active = 'dashboard', consultVariant 
           {/* Desktop/Mobile button */}
           <button
             type="button"
+            onClick={() => {
+              setIsChatOpen(true)
+              if (onClose) onClose()
+            }}
             className={`flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 font-sans text-sm font-semibold text-white shadow-md transition hover:opacity-95 md:hidden lg:flex ${
               consultVariant === 'slate' ? 'bg-pa-slate-4' : 'bg-pa-brown-2'
-            }`}
+            } cursor-pointer`}
           >
             <Sparkles className="h-4 w-4" />
             <span>AI Consult</span>
@@ -94,15 +101,21 @@ export default function DashboardSidebar({ active = 'dashboard', consultVariant 
           {/* Tablet collapsed button */}
           <button
             type="button"
+            onClick={() => {
+              setIsChatOpen(true)
+              if (onClose) onClose()
+            }}
             className={`mx-auto hidden md:flex lg:hidden h-11 w-11 items-center justify-center rounded-xl text-white shadow-md transition hover:opacity-95 ${
               consultVariant === 'slate' ? 'bg-pa-slate-4' : 'bg-pa-brown-2'
-            }`}
+            } cursor-pointer`}
             title="AI Consult"
           >
             <Sparkles className="h-5 w-5" />
           </button>
         </div>
       </aside>
+
+      <AyurvedaChatbot isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </>
   )
 }

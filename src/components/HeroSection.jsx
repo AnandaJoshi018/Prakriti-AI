@@ -160,7 +160,7 @@ export default function HeroSection({ variant = 'home' }) {
             </p>
           </div>
           <div>
-            <p className="font-serif text-3xl font-semibold text-pa-green md:text-[2.3rem]">98.4%</p>
+            <p className="font-serif text-3xl font-semibold text-pa-green md:text-[2.3rem]">88.74%</p>
             <p className="mt-1 font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-[#6f7f6f]">
               AI Accuracy
             </p>

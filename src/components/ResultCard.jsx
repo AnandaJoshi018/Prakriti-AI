@@ -7,7 +7,7 @@ function DominantCard() {
       <div className="pa-dominant-leaf" aria-hidden />
       <div className="relative inline-flex items-center gap-2 rounded-full bg-pa-green-2 px-3 py-1 text-white">
         <Sparkles className="h-3.5 w-3.5" />
-        <span className="font-sans text-[10px] font-bold uppercase tracking-wide">Dominant Energy</span>
+        <span className="font-sans text-[10px] font-bold uppercase tracking-wide">Prakriti Type</span>
       </div>
       <h2 className="relative mt-6 font-serif text-[2.75rem] font-bold leading-none text-pa-green-2 md:text-[3.25rem]">
         Pitta

@@ -59,8 +59,8 @@ def generate_prediction_report(data: PredictionDetailResponse, output_path: Path
     )
     elements.append(dosha_table)
     elements.append(Spacer(1, 0.3 * cm))
-    elements.append(Paragraph(f"<b>Dominant Dosha:</b> {data.dominant_dosha}", body_style))
-    elements.append(Paragraph(f"<b>Confidence:</b> {data.confidence}%", body_style))
+    elements.append(Paragraph(f"<b>Primary Constitution:</b> {data.dominant_dosha}", body_style))
+    elements.append(Paragraph(f"<b>Percentage:</b> {data.confidence}%", body_style))
     elements.append(Spacer(1, 0.3 * cm))
 
     elements.append(Paragraph("AI Explanation", heading_style))

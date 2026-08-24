@@ -9,14 +9,15 @@ export function DietaryProtocolCard({ recommendations, dominantDosha }) {
       return recommendations.foods_to_eat.split(',').map((s) => s.trim()).filter(Boolean)
     }
     // Fallback based on dominantDosha
-    if (dominantDosha === 'Vata') {
+    const cleanDosha = dominantDosha.replace(' Blend', '')
+    if (cleanDosha.includes('Vata')) {
       return [
         'Warm soups, stews, and cooked grains like rice or oats.',
         'Root vegetables, ghee, and soaked nuts.',
         'Sweet fruits (bananas, mangoes) and warm dairy.',
       ]
     }
-    if (dominantDosha === 'Kapha') {
+    if (cleanDosha.includes('Kapha')) {
       return [
         'Light grains (millet, barley, quinoa) and steamed vegetables.',
         'Legumes (lentils, mung beans) and raw honey in moderation.',
@@ -35,13 +36,14 @@ export function DietaryProtocolCard({ recommendations, dominantDosha }) {
     if (recommendations?.foods_to_avoid) {
       return recommendations.foods_to_avoid.split(',').map((s) => s.trim()).filter(Boolean)
     }
-    if (dominantDosha === 'Vata') {
+    const cleanDosha = dominantDosha.replace(' Blend', '')
+    if (cleanDosha.includes('Vata')) {
       return [
         'Raw salads, dry crackers, and cold beverages.',
         'Excessive beans and bitter or astringent foods.',
       ]
     }
-    if (dominantDosha === 'Kapha') {
+    if (cleanDosha.includes('Kapha')) {
       return [
         'Heavy dairy, fried foods, and excessive sweets.',
         'Cold foods and excessive nut intake.',
@@ -106,23 +108,25 @@ export function DietaryProtocolCard({ recommendations, dominantDosha }) {
 }
 
 export function MovementCard({ recommendations, dominantDosha }) {
+  const cleanDosha = useMemo(() => dominantDosha.replace(' Blend', ''), [dominantDosha])
+
   const yogaDescription = recommendations?.yoga || (
-    dominantDosha === 'Vata'
+    cleanDosha.includes('Vata')
       ? 'Focus on slow, grounding, and warming sequences to steady the active Vata energy.'
-      : dominantDosha === 'Kapha'
+      : cleanDosha.includes('Kapha')
       ? 'Focus on dynamic, energizing, and heating practices to stimulate blood flow and metabolism.'
       : 'Focus on grounding, calming, and cooling sequences to balance internal heat.'
   )
 
   const items = useMemo(() => {
-    if (dominantDosha === 'Vata') {
+    if (cleanDosha.includes('Vata')) {
       return [
         { title: 'Sun Salutation', sub: 'Slow Surya Namaskar - 6 Reps' },
         { title: 'Child\'s Pose', sub: 'Balasana - 5 Min Hold' },
         { title: 'Corpse Pose', sub: 'Savasana - Grounding' },
       ]
     }
-    if (dominantDosha === 'Kapha') {
+    if (cleanDosha.includes('Kapha')) {
       return [
         { title: 'Sun Salutation', sub: 'Vigorous Surya Namaskar - 12 Reps' },
         { title: 'Warrior Pose', sub: 'Virabhadrasana - 3 Min Hold' },
@@ -135,7 +139,7 @@ export function MovementCard({ recommendations, dominantDosha }) {
       { title: 'Pigeon Pose', sub: 'Kapotasana - 5 Min Hold' },
       { title: 'Savasana', sub: 'Corpse Pose - Deep Cooling' },
     ]
-  }, [dominantDosha])
+  }, [cleanDosha])
 
   return (
     <article className="flex h-full flex-col rounded-[28px] bg-[#c5daf5] p-7 shadow-sm md:p-8">
@@ -181,13 +185,14 @@ export function EveningRoutineCard({ recommendations, dominantDosha }) {
         .map((s) => s.trim())
         .filter((s) => s.length > 2)
     }
-    if (dominantDosha === 'Vata') {
+    const cleanDosha = dominantDosha.replace(' Blend', '')
+    if (cleanDosha.includes('Vata')) {
       return [
         'Warm oil self-massage (Abhyanga) with sesame oil.',
         'Screen-free wind-down with warm herbal tea (Chamomile or Nutmeg milk).',
       ]
     }
-    if (dominantDosha === 'Kapha') {
+    if (cleanDosha.includes('Kapha')) {
       return [
         'Light walk after dinner and warm cup of tulsi tea.',
         'Screen-free wind-down for 30 minutes before sleep.',
@@ -223,23 +228,25 @@ export function EveningRoutineCard({ recommendations, dominantDosha }) {
 }
 
 export function MentalHygieneCard({ recommendations, dominantDosha }) {
+  const cleanDosha = useMemo(() => dominantDosha.replace(' Blend', ''), [dominantDosha])
+
   const description = recommendations?.mental_hygiene || (
-    dominantDosha === 'Vata'
+    cleanDosha.includes('Vata')
       ? 'Calm the active mind through slow paced breathing, mindfulness practice, and regular journaling. Vata types benefit from grounding routines, reducing sensory inputs, and avoiding multitasking.'
-      : dominantDosha === 'Kapha'
+      : cleanDosha.includes('Kapha')
       ? 'Stimulate energy and motivation through creative projects, physical activity, and social connections. Kapha types benefit from shaking up routines, avoiding stagnation, and waking up early.'
       : 'Cultivate patience through paced breathing and reflective journaling. Pitta types benefit from softening ambition loops with sensory moderation and moonlit walks.'
   )
 
   const tags = useMemo(() => {
-    if (dominantDosha === 'Vata') {
+    if (cleanDosha.includes('Vata')) {
       return ['Grounding Breath', 'Warm Baths', 'Journaling']
     }
-    if (dominantDosha === 'Kapha') {
+    if (cleanDosha.includes('Kapha')) {
       return ['Vigorous Walk', 'Creative Expression', 'Socializing']
     }
     return ['Meditation', 'Nature Walks', 'Cooling Pranayama']
-  }, [dominantDosha])
+  }, [cleanDosha])
 
   return (
     <article className="h-full rounded-[28px] bg-[#f6f4df] p-7 shadow-sm md:p-8">

@@ -128,8 +128,13 @@ export default function HistoryPage() {
                           <span>{dateStr}</span>
                         </div>
                         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                          <h3 className="font-serif text-lg font-bold text-pa-green-2">
-                            Dominant: {item.dominant_dosha}
+                          <h3 className="font-serif text-lg font-bold text-pa-green-2 flex items-center gap-2 flex-wrap">
+                            <span>Prakriti Type: {item.dominant_dosha}</span>
+                            {item.dominant_dosha.endsWith('Blend') && (
+                              <span className="font-sans text-[9px] bg-amber-600 text-white rounded-full px-2 py-0.5 font-bold uppercase tracking-wider shadow-sm">
+                                Blend
+                              </span>
+                            )}
                           </h3>
                           <span className="font-sans text-[11px] text-pa-green-3 bg-[#eef4e4] rounded-full px-2.5 py-0.5 font-semibold">
                             ID: #{item.id}

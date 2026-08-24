@@ -39,6 +39,12 @@ export default function ResultPage() {
     }
   }, [prediction])
 
+  const difference = useMemo(() => {
+    if (!summary?.doshas) return 0
+    const sorted = Object.values(summary.doshas).sort((a, b) => b - a)
+    return sorted[0] - sorted[1]
+  }, [summary])
+
   const handleDownloadReport = async () => {
     if (!prediction?.id) {
       setDownloadError('A completed analysis is required before downloading a report.')
@@ -90,7 +96,7 @@ export default function ResultPage() {
               </h1>
               <p className="mt-4 font-sans text-sm leading-relaxed text-[#5f6f5f] md:text-[0.95rem]">
                 Our model synthesizes symptom language, seasonal context, and constitutional markers to
-                surface your dominant dosha pattern with transparent confidence intervals.
+                surface your Prakriti Type pattern with transparent confidence intervals.
               </p>
             </header>
 
@@ -110,17 +116,31 @@ export default function ResultPage() {
               <>
                 <div className="mt-10 grid gap-6 lg:grid-cols-2">
                   <article className="relative overflow-hidden rounded-[28px] bg-pa-sage-2 p-8 shadow-sm md:p-10">
-                    <div className="relative inline-flex items-center gap-2 rounded-full bg-pa-green-2 px-3 py-1 text-white">
-                      <span className="font-sans text-[10px] font-bold uppercase tracking-wide">Dominant Energy</span>
+                    <div className="relative flex flex-wrap items-center gap-2">
+                      <div className="inline-flex items-center gap-2 rounded-full bg-pa-green-2 px-3 py-1 text-white">
+                        <span className="font-sans text-[10px] font-bold uppercase tracking-wide">Prakriti Type</span>
+                      </div>
+                      {summary.dominant_dosha.endsWith('Blend') && (
+                        <div className="inline-flex items-center gap-2 rounded-full bg-amber-600 px-3 py-1 text-white shadow-sm">
+                          <span className="font-sans text-[10px] font-bold uppercase tracking-wide">Blend</span>
+                        </div>
+                      )}
                     </div>
-                    <h2 className="relative mt-6 font-serif text-[2.75rem] font-bold leading-none text-pa-green-2 md:text-[3.25rem]">
+                    <h2 className="relative mt-6 font-serif text-[2.5rem] font-bold leading-tight text-pa-green-2 md:text-[3rem]">
                       {summary.dominant_dosha}
                     </h2>
                     <p className="relative mt-4 max-w-md font-sans text-sm leading-relaxed text-[#4f5f4f]">
                       {summary.explanation}
                     </p>
                     <div className="relative mt-6 rounded-2xl bg-white/70 p-4 text-sm text-[#4c5b4c]">
-                      <p className="font-semibold text-pa-green-2">Primary Dosha: {summary.confidence.toFixed(2)}%</p>
+                      <p className="font-semibold text-pa-green-2">
+                        {summary.dominant_dosha.endsWith('Blend') ? 'Primary Constitution' : 'Primary Dosha'}: {summary.confidence.toFixed(2)}%
+                      </p>
+                      {summary.dominant_dosha.endsWith('Blend') && (
+                        <p className="mt-1.5 text-xs text-[#5f6f5f] font-semibold">
+                          Difference: {difference.toFixed(2)}%
+                        </p>
+                      )}
                     </div>
                     <div className="relative mt-6 flex flex-wrap items-center gap-3">
                       <button

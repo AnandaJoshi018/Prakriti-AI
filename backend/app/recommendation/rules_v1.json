@@ -48,6 +48,54 @@
       "mental_hygiene": "Stimulate energy and motivation through creative projects, physical activity, and social connections. Kapha types benefit from shaking up routines, avoiding stagnation, and waking up early.",
       "stress_management": "Stay engaged with stimulating activities, social connection, and creative pursuits. Avoid isolation and lethargy.",
       "wellness_tips": "Stay active, seek variety and new experiences, and avoid sleeping during the day."
+    },
+    "Vata-Pitta": {
+      "diet": "Favor warm, cooked, nourishing meals that are moderately spiced. Emphasize sweet, sour, and salty tastes to ground Vata, while using sweet, bitter, and astringent tastes to cool Pitta. Avoid extremely hot, spicy, dry, or cold raw food.",
+      "foods_to_eat": "Cooked grains (basmati rice, oats), sweet juicy fruits (grapes, melons), root vegetables (sweet potatoes, carrots), green beans, zucchini, coconut oil, ghee, soaked almonds, mild spices (fennel, coriander, cardamom, ginger in moderation), fresh sweet dairy.",
+      "foods_to_avoid": "Raw salads, dry crackers, iced drinks, extremely spicy chili peppers, vinegar, fermented foods, red meat, excessive garlic and onions, and strong caffeine.",
+      "herbs": "Shatavari, Ashwagandha (in moderation), Brahmi, Licorice root, and fennel tea to balance both energy channels.",
+      "yoga": "A balanced, non-competitive Hatha or gentle flow. Practice slow, grounding poses with steady breathing. Avoid excessive fast vinyasa in hot rooms. Emphasize standing poses and restorative Savasana.",
+      "lifestyle": "Maintain regular daily routines. Stay warm but avoid direct midday sun. Incorporate self-massage (Abhyanga) using a mixture of sesame and coconut oils.",
+      "daily_routine": "Wake before 6 AM, oil massage, warm breakfast by 8 AM, focus on structured tasks during the day, cooling walk at dusk, light warm dinner by 7 PM, sleep by 10 PM.",
+      "morning_routine": "Wake before 6:30 AM, drink room-temperature water with lemon, practice gentle stretching, and apply a light oil massage.",
+      "evening_routine": "Screen-free wind-down for 45 minutes, warm chamomile tea or warm milk with nutmeg, and gentle breathing exercises before bed.",
+      "hydration": "Drink lukewarm or room-temperature water. Warm herbal teas (fennel, coriander, or chamomile) are excellent. Avoid ice-cold drinks.",
+      "sleep": "Aim for 7.5 to 8 hours of quiet sleep. Keep the bedroom well-ventilated, quiet, and slightly warm. Avoid screen time for an hour before bed.",
+      "mental_hygiene": "Calm the active mind through slow, paced breathing (Pranayama) and reflective journaling. Avoid overworking, multitasking, and heated debates.",
+      "stress_management": "Practice daily meditation, deep abdominal breathing, and slow walks in nature. Keep a work-life balance and schedule rest.",
+      "wellness_tips": "Balance activity with rest. Stay grounded, hydrated, and keep your body temperature stable."
+    },
+    "Vata-Kapha": {
+      "diet": "Favor warm, freshly cooked, light, and moderately spiced food. Emphasize pungent, bitter, and astringent tastes, with light sweet and salty inputs to ground Vata without aggravating Kapha. Serve warm and keep oil content moderate.",
+      "foods_to_eat": "Warm light grains (millet, quinoa, basmati rice), steamed leafy vegetables, warm soups with ginger and cumin, legumes (mung dahl, red lentils), honey (in moderation), cooked apples or berries, sunflower seeds, light warming spices (ginger, black pepper, cinnamon, turmeric).",
+      "foods_to_avoid": "Ice-cold foods and drinks, heavy deep-fried items, excessive sweets, heavy dairy products (cheese, ice cream), cold raw salads, red meat, and stale or processed foods.",
+      "herbs": "Triphala, Tulsi, Ginger, Pippali, Ashwagandha, and Turmeric to stimulate digestion and clear congestion.",
+      "yoga": "A moderately active flow that is energizing but not overly exhausting. Focus on warming Sun Salutations, chest openers, backbends, and standing poses. Incorporate energizing Pranayama (Nadi Shodhana or Kapalabhati in moderation).",
+      "lifestyle": "Maintain physical activity while ensuring adequate rest. Stay warm, dry, and avoid a sedentary routine. Engage in dry brushing followed by a light warm sesame oil massage.",
+      "daily_routine": "Wake before 6 AM, dry brushing, moderate exercise, light warm breakfast, active daytime routine, light dinner before 7 PM, screen-free wind-down, sleep by 10 PM.",
+      "morning_routine": "Wake before 6 AM, drink warm ginger water, perform dry brushing, and engage in active stretching or yoga.",
+      "evening_routine": "Take a warm herbal tea, reflect on the day, avoid late snacks, and practice calming breathing exercises.",
+      "hydration": "Drink warm water or ginger-honey tea throughout the day. Avoid cold water and sugary carbonated drinks.",
+      "sleep": "Aim for 7 to 8 hours of sleep. Wake up early with the sun. Avoid daytime napping, which increases Kapha heaviness.",
+      "mental_hygiene": "Stimulate motivation through new experiences and creative pursuits. Keep an active, structured mind to combat mental stagnation or worry.",
+      "stress_management": "Combine gentle cardio exercise, nature walks, social interaction, and meditation to stay mentally agile and grounded.",
+      "wellness_tips": "Stay active and warm, seek variety, and choose light, warm, easy-to-digest meals."
+    },
+    "Pitta-Kapha": {
+      "diet": "Favor cooling, light, bitter, and astringent tastes. Keep diet clean with minimal oil, salt, and heavy sweets. Avoid hot spices, heavy deep-fried food, and sour, salty, or fermented items.",
+      "foods_to_eat": "Fresh sweet fruits (pears, apples, melons), leafy green vegetables, cruciferous vegetables, light grains (barley, quinoa, basmati rice), legumes (chickpeas, mung beans), tofu, coriander, fennel, cardamom, and mint.",
+      "foods_to_avoid": "Excessive chili, hot spices, vinegar, fermented foods, heavy dairy, fried foods, red meat, excessive salt, and alcohol.",
+      "herbs": "Amalaki, Brahmi, Tulsi, Neem, and Turmeric to cleanse the system and balance metabolic fire.",
+      "yoga": "Cooling and moderately active yoga practice. Moon Salutations, gentle backbends (Cobra, Locust), forward folds, and cooling Pranayama (Sheetali or Nadi Shodhana). Practice in a cool space.",
+      "lifestyle": "Balance focus and drive with relaxation. Avoid excessive sun and heat. Stay active but not overly competitive. Cool down with daily walks in nature, especially near water.",
+      "daily_routine": "Wake by 6 AM, cooling shower, light breakfast, focused work with planned breaks, evening walk, light dinner before sunset, screen-free rest, bed by 10:30 PM.",
+      "morning_routine": "Wake by 6 AM, drink room-temperature water with mint, practice calming yoga, and take a cooling shower.",
+      "evening_routine": "Cool oil massage with coconut oil on the soles of the feet, screen-free wind-down, and gentle meditation.",
+      "hydration": "Drink cool or room-temperature water with cucumber or mint. Fennel and coriander teas are excellent. Avoid hot, spicy drinks.",
+      "sleep": "7 to 8 hours of sleep in a cool, dark, well-ventilated room. Avoid late-night work and screen time.",
+      "mental_hygiene": "Cultivate compassion and patience. Practice daily mindfulness and journaling to release intellectual tension or irritation.",
+      "stress_management": "Engage in non-competitive recreation, spend time in nature, and practice cooling meditation (Sohan). Set clear boundaries to avoid burnout.",
+      "wellness_tips": "Stay cool, stay active, maintain portion sizes, and avoid competitive pressure."
     }
   }
 }

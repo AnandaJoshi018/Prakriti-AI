@@ -66,7 +66,10 @@ def _blend(
 
 
 def _build_explanation(
-    dominant: str,
+    dominant_dosha: str,
+    highest_dosha: str,
+    second_dosha: str,
+    is_blend: bool,
     probs: dict[str, float],
     assessment: AssessmentAnswers | None,
     symptoms: str,
@@ -78,10 +81,17 @@ def _build_explanation(
     else:
         symptom_snippet = symptom_clean
 
-    parts = [
-        f"Based on symptom language analysis, your reported symptoms ('{symptom_snippet}') "
-        f"indicate a dominant {dominant} pattern ({probs[dominant]:.1f}% majority)."
-    ]
+    if is_blend:
+        parts = [
+            f"Based on symptom language analysis, your reported symptoms ('{symptom_snippet}') "
+            f"indicate a dual-dosha {dominant_dosha} constitution, showing a close balance between "
+            f"{highest_dosha} ({probs[highest_dosha]:.1f}%) and {second_dosha} ({probs[second_dosha]:.1f}%)."
+        ]
+    else:
+        parts = [
+            f"Based on symptom language analysis, your reported symptoms ('{symptom_snippet}') "
+            f"indicate a dominant {highest_dosha} pattern ({probs[highest_dosha]:.1f}% majority)."
+        ]
 
     if ocr_text and ocr_text.strip():
         ocr_clean = ocr_text.strip()
@@ -104,11 +114,11 @@ def _build_explanation(
             "This prediction is based entirely on symptom analysis, as no assessment was provided."
         )
 
-    secondary = sorted(probs, key=probs.get, reverse=True)[1]
-    parts.append(
-        f"Your secondary influence is {secondary} at {probs[secondary]:.1f}%, "
-        f"suggesting a {dominant}-{secondary} prakriti blend."
-    )
+    if not is_blend:
+        parts.append(
+            f"Your secondary influence is {second_dosha} at {probs[second_dosha]:.1f}%, "
+            f"suggesting a {highest_dosha}-{second_dosha} prakriti blend."
+        )
     return " ".join(parts)
 
 
@@ -126,10 +136,38 @@ def run_prediction(
     assessment_probs = _assessment_probs(assessment)
     final_probs = _blend(ml_probs, assessment_probs)
 
-    dominant = max(final_probs, key=final_probs.get)
-    confidence = final_probs[dominant]
+    # Sort final probabilities in descending order to identify top doshas
+    sorted_doshas = sorted(final_probs.items(), key=lambda x: x[1], reverse=True)
+    highest_dosha, highest_pct = sorted_doshas[0]
+    second_dosha, second_pct = sorted_doshas[1]
+
+    diff = highest_pct - second_pct
+    is_blend = diff <= 10.0
+
+    if is_blend:
+        # Determine canonical name for the dual-dosha blend
+        doshas_in_blend = {highest_dosha, second_dosha}
+        if {"Vata", "Pitta"}.issubset(doshas_in_blend):
+            dominant = "Vata-Pitta Blend"
+        elif {"Vata", "Kapha"}.issubset(doshas_in_blend):
+            dominant = "Vata-Kapha Blend"
+        else:
+            dominant = "Pitta-Kapha Blend"
+    else:
+        dominant = highest_dosha
+
+    confidence = highest_pct
     recommendations = get_recommendations(dominant)
-    explanation = _build_explanation(dominant, final_probs, assessment, symptoms, ocr_text)
+    explanation = _build_explanation(
+        dominant_dosha=dominant,
+        highest_dosha=highest_dosha,
+        second_dosha=second_dosha,
+        is_blend=is_blend,
+        probs=final_probs,
+        assessment=assessment,
+        symptoms=symptoms,
+        ocr_text=ocr_text,
+    )
 
     return PredictionResponse(
         prediction=DoshaPercentages(**final_probs),

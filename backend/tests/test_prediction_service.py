@@ -39,3 +39,22 @@ def test_normalize():
     probs = {"Vata": 50.0, "Pitta": 30.0, "Kapha": 20.0}
     normalized = _normalize(probs)
     assert abs(sum(normalized.values()) - 100.0) < 0.01
+
+
+def test_build_explanation_blend():
+    from app.services.prediction_service import _build_explanation
+    probs = {"Vata": 45.0, "Pitta": 42.0, "Kapha": 13.0}
+    exp = _build_explanation(
+        dominant_dosha="Vata-Pitta Blend",
+        highest_dosha="Vata",
+        second_dosha="Pitta",
+        is_blend=True,
+        probs=probs,
+        assessment=None,
+        symptoms="Dryness and anxiety",
+        ocr_text=None,
+    )
+    assert "Vata-Pitta Blend" in exp
+    assert "45.0%" in exp
+    assert "42.0%" in exp
+    assert "dual-dosha" in exp

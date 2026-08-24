@@ -19,3 +19,24 @@ def test_kapha_recommendations():
     rec = get_recommendations("Kapha")
     assert rec.lifestyle
     assert rec.stress_management
+
+
+def test_vata_pitta_recommendations():
+    rec = get_recommendations("Vata-Pitta Blend")
+    assert rec.diet
+    assert rec.herbs
+    assert rec.yoga
+
+
+def test_vata_kapha_recommendations():
+    rec = get_recommendations("Vata-Kapha Blend")
+    assert rec.diet
+    assert rec.herbs
+    assert rec.yoga
+
+
+def test_pitta_kapha_recommendations():
+    rec = get_recommendations("Pitta-Kapha Blend")
+    assert rec.diet
+    assert rec.herbs
+    assert rec.yoga

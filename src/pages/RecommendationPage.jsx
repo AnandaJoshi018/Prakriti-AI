@@ -83,9 +83,15 @@ export default function RecommendationPage() {
               <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#c9a24a] text-white">
                 ⚡
               </span>
-              <p className="mt-3 font-sans text-sm text-[#4a4a3a] md:mt-0">
-                Current Constitution: Selected for your{' '}
-                <span className="font-bold text-pa-green-3">{dominantDosha.toUpperCase()}</span> constitution
+              <p className="mt-3 font-sans text-sm text-[#4a4a3a] md:mt-0 flex items-center gap-2 flex-wrap">
+                <span>Prakriti Type:</span>
+                <span className="font-bold text-pa-green-3 uppercase">{dominantDosha}</span>
+                {dominantDosha.endsWith('Blend') && (
+                  <span className="font-sans text-[9px] bg-amber-600 text-white rounded-full px-2.5 py-0.5 font-bold uppercase tracking-wider shadow-sm">
+                    Blend
+                  </span>
+                )}
+                <span>constitution</span>
               </p>
             </div>
 
