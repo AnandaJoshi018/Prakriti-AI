@@ -6,6 +6,7 @@ import SignupPage from './pages/SignupPage.jsx'
 import DashboardPage from './pages/DashboardPage.jsx'
 import ResultPage from './pages/ResultPage.jsx'
 import RecommendationPage from './pages/RecommendationPage.jsx'
+import YogaRoutinePage from './pages/YogaRoutinePage.jsx'
 import LearnAyurvedaPage from './pages/LearnAyurvedaPage.jsx'
 import HistoryPage from './pages/HistoryPage.jsx'
 import './styles/App.css'
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/result" element={<ResultPage />} />
         <Route path="/recommendation" element={<RecommendationPage />} />
+        <Route path="/yoga-routine" element={<YogaRoutinePage />} />
         <Route path="/learn-ayurveda" element={<LearnAyurvedaPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />

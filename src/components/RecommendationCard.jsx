@@ -1,5 +1,6 @@
 import { UtensilsCrossed, Check, AlertTriangle, ArrowRight } from 'lucide-react'
 import { useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import salad from '../assets/images/salad-bowl.jpg'
 import zen from '../assets/images/zen-stones.jpg'
 
@@ -108,38 +109,46 @@ export function DietaryProtocolCard({ recommendations, dominantDosha }) {
 }
 
 export function MovementCard({ recommendations, dominantDosha }) {
-  const cleanDosha = useMemo(() => dominantDosha.replace(' Blend', ''), [dominantDosha])
+  const resolvedDosha = useMemo(() => {
+    const clean = dominantDosha.replace(' Blend', '')
+    if (clean.includes('Vata')) return 'Vata'
+    if (clean.includes('Kapha')) return 'Kapha'
+    return 'Pitta'
+  }, [dominantDosha])
 
   const yogaDescription = recommendations?.yoga || (
-    cleanDosha.includes('Vata')
+    resolvedDosha === 'Vata'
       ? 'Focus on slow, grounding, and warming sequences to steady the active Vata energy.'
-      : cleanDosha.includes('Kapha')
+      : resolvedDosha === 'Kapha'
       ? 'Focus on dynamic, energizing, and heating practices to stimulate blood flow and metabolism.'
       : 'Focus on grounding, calming, and cooling sequences to balance internal heat.'
   )
 
   const items = useMemo(() => {
-    if (cleanDosha.includes('Vata')) {
+    if (resolvedDosha === 'Vata') {
       return [
-        { title: 'Sun Salutation', sub: 'Slow Surya Namaskar - 6 Reps' },
-        { title: 'Child\'s Pose', sub: 'Balasana - 5 Min Hold' },
-        { title: 'Corpse Pose', sub: 'Savasana - Grounding' },
+        { englishName: 'Mountain Pose', sanskritName: 'Tadasana' },
+        { englishName: 'Cat–Cow Pose', sanskritName: 'Marjaryasana–Bitilasana' },
+        { englishName: 'Child’s Pose', sanskritName: 'Balasana' },
+        { englishName: 'Low Lunge', sanskritName: 'Anjaneyasana' },
       ]
     }
-    if (cleanDosha.includes('Kapha')) {
+    if (resolvedDosha === 'Kapha') {
       return [
-        { title: 'Sun Salutation', sub: 'Vigorous Surya Namaskar - 12 Reps' },
-        { title: 'Warrior Pose', sub: 'Virabhadrasana - 3 Min Hold' },
-        { title: 'Breath of Fire', sub: 'Kapalabhati - 5 Min' },
+        { englishName: 'Sun Salutation', sanskritName: 'Surya Namaskar' },
+        { englishName: 'Chair Pose', sanskritName: 'Utkatasana' },
+        { englishName: 'Warrior I', sanskritName: 'Virabhadrasana I' },
+        { englishName: 'Warrior II', sanskritName: 'Virabhadrasana II' },
       ]
     }
     // Default to Pitta
     return [
-      { title: 'Moonsalutation', sub: 'Chandra Namaskar - 12 Reps' },
-      { title: 'Pigeon Pose', sub: 'Kapotasana - 5 Min Hold' },
-      { title: 'Savasana', sub: 'Corpse Pose - Deep Cooling' },
+      { englishName: 'Moon Salutation', sanskritName: 'Chandra Namaskar' },
+      { englishName: 'Child’s Pose', sanskritName: 'Balasana' },
+      { englishName: 'Cat–Cow Pose', sanskritName: 'Marjaryasana–Bitilasana' },
+      { englishName: 'Cobra Pose', sanskritName: 'Bhujangasana' },
     ]
-  }, [cleanDosha])
+  }, [resolvedDosha])
 
   return (
     <article className="flex h-full flex-col rounded-[28px] bg-[#c5daf5] p-7 shadow-sm md:p-8">
@@ -157,20 +166,20 @@ export function MovementCard({ recommendations, dominantDosha }) {
       <div className="mt-6 flex flex-1 flex-col gap-3">
         {items.map((it) => (
           <div
-            key={it.title}
+            key={it.englishName}
             className="rounded-2xl border border-white/50 bg-white/45 px-4 py-3 backdrop-blur-sm"
           >
-            <p className="font-sans text-xs font-bold uppercase tracking-wide text-[#1b2b45]">{it.title}</p>
-            <p className="mt-1 font-serif text-xs italic text-[#2f3f55]">{it.sub}</p>
+            <p className="font-sans text-sm font-bold text-[#1b2b45]">{it.englishName}</p>
+            <p className="mt-1 font-serif text-xs italic text-[#2f3f55]">{it.sanskritName}</p>
           </div>
         ))}
       </div>
-      <button
-        type="button"
+      <Link
+        to="/yoga-routine"
         className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#455a64] py-3 font-sans text-sm font-semibold text-white transition hover:bg-[#3a4d56]"
       >
         View Yoga Routine <ArrowRight className="h-4 w-4" />
-      </button>
+      </Link>
     </article>
   )
 }
