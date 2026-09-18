@@ -7,33 +7,34 @@ import { listPredictions } from '../services/api.js'
 import { yogaPractices } from '../data/yogaData.js'
 import '../styles/App.css'
 
-function VideoCard({ practice, userNormalizedDosha }) {
+function VideoCard({ practice }) {
   const videoRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
   const [videoError, setVideoError] = useState(false)
 
-  // Construct local video file path dynamically based on practice and user active doshas
-  const videoPath = useMemo(() => {
-    if (practice.folder === 'Additional-Practice') {
-      return `/Yoga-Videos/Additional-Practice/${practice.fileName}`
+  const handleDownload = async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (!practice.videoUrl) return
+    try {
+      const res = await fetch(practice.videoUrl)
+      const blob = await res.blob()
+      const blobUrl = window.URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = blobUrl
+      const urlParts = practice.videoUrl.split('/')
+      const downloadName = urlParts[urlParts.length - 1] || `${practice.englishName.toLowerCase().replace(/\s+/g, '-')}-1080p.mp4`
+      a.download = downloadName
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      window.URL.revokeObjectURL(blobUrl)
+    } catch (err) {
+      console.error('Download failed, opening direct URL instead:', err)
+      window.open(practice.videoUrl, '_blank')
     }
-    
-    // Parse userNormalizedDosha (e.g. 'VATA-PITTA' or 'PITTA') to titlecase array (e.g. ['Vata', 'Pitta'])
-    const activeDoshas = userNormalizedDosha
-      .split('-')
-      .map(d => d.trim().charAt(0).toUpperCase() + d.trim().slice(1).toLowerCase())
-      
-    // Find the first matching dosha between user active doshas and practice doshas
-    const matchedDosha = activeDoshas.find(ad => practice.doshas.includes(ad))
-    
-    if (matchedDosha) {
-      return `/Yoga-Videos/${matchedDosha}/${practice.fileName}`
-    }
-    
-    // Fallback to the first dosha mapped to the practice
-    return `/Yoga-Videos/${practice.doshas[0]}/${practice.fileName}`
-  }, [practice, userNormalizedDosha])
+  }
 
   const togglePlay = () => {
     if (!videoRef.current) return
@@ -80,14 +81,14 @@ function VideoCard({ practice, userNormalizedDosha }) {
               Video Demonstration Unavailable
             </p>
             <p className="mt-1 font-sans text-[10px] text-pa-muted break-all">
-              Path: {videoPath}
+              Source: {practice.videoUrl}
             </p>
           </div>
         ) : (
           <>
             <video
               ref={videoRef}
-              src={videoPath}
+              src={practice.videoUrl}
               preload="metadata"
               className="h-full w-full object-cover cursor-pointer"
               onClick={togglePlay}
@@ -114,7 +115,7 @@ function VideoCard({ practice, userNormalizedDosha }) {
                 </div>
               </button>
             )}
-            
+
             {/* Controls Overlay (top right) */}
             <div className="absolute right-3 top-3 flex gap-1.5 z-10">
               {/* Mute/Unmute toggle (only visible when playing) */}
@@ -147,7 +148,7 @@ function VideoCard({ practice, userNormalizedDosha }) {
                 </svg>
               </button>
             </div>
-            
+
             {/* Badges on top left */}
             <div className="absolute left-3 top-3 flex gap-1.5">
               <span className="rounded-full bg-black/60 px-2.5 py-0.5 font-sans text-[9px] font-bold uppercase tracking-wider text-white">
@@ -235,8 +236,11 @@ function VideoCard({ practice, userNormalizedDosha }) {
             )}
           </button>
           <a
-            href={videoPath}
-            download={practice.fileName}
+            href={practice.videoUrl}
+            onClick={handleDownload}
+            target="_blank"
+            rel="noopener noreferrer"
+            download
             className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#7b5e0b] py-2.5 font-sans text-xs font-semibold text-white hover:opacity-90 transition text-center cursor-pointer"
           >
             <svg
@@ -416,7 +420,6 @@ export default function YogaRoutinePage() {
                 <VideoCard
                   key={practice.englishName}
                   practice={practice}
-                  userNormalizedDosha={normalizedDosha}
                 />
               ))}
             </div>

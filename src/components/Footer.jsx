@@ -25,7 +25,7 @@ export default function Footer({ variant = 'marketing' }) {
           ))}
         </div>
         <p className="mt-6 text-[10px] font-medium uppercase tracking-[0.12em] text-[#a0a89a]">
-          © 2024 PRAKRITI AI - THE BOTANICAL ALGORITHM
+          © 2026 PRAKRITI AI - THE BOTANICAL ALGORITHM
         </p>
       </footer>
     )
@@ -41,7 +41,7 @@ export default function Footer({ variant = 'marketing' }) {
               PRAKRITI AI
             </p>
             <p className="mt-1 font-sans text-[11px] text-[#8a9585]">
-              © 2024 PRAKRITI AI - The Botanical Algorithm
+              © 2026 PRAKRITI AI - The Botanical Algorithm
             </p>
           </div>
           <div className="flex flex-wrap gap-4 font-sans text-[11px] text-[#7a8578]">
@@ -68,7 +68,7 @@ export default function Footer({ variant = 'marketing' }) {
               </Link>
             ))}
           </nav>
-          <p className="text-[11px]">© 2024 PRAKRITI AI - The Botanical Algorithm</p>
+          <p className="text-[11px]">© 2026 PRAKRITI AI - The Botanical Algorithm</p>
         </div>
       </footer>
     )
@@ -80,7 +80,7 @@ export default function Footer({ variant = 'marketing' }) {
         <div>
           <p className="font-serif text-lg font-bold tracking-[0.08em] text-pa-green">PRAKRITI AI</p>
           <p className="mt-3 max-w-sm font-sans text-[11px] leading-relaxed text-[#8a9585]">
-            © 2024 PRAKRITI AI - THE BOTANICAL ALGORITHM
+            © 2026 PRAKRITI AI - THE BOTANICAL ALGORITHM
           </p>
         </div>
         <nav className="flex flex-wrap gap-x-8 gap-y-3 font-sans text-sm text-[#7a8578]">

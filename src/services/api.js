@@ -125,7 +125,10 @@ async function getCurrentUser() {
 
 async function getPredictionHistory() {
   const token = getStoredToken()
-  if (!token) return []
+  if (!token) {
+    // No token means the user is not logged in. Throw so HistoryPage can redirect.
+    throw new Error('Session expired. Please login again.')
+  }
   const response = await fetch(`${API_BASE_URL}/api/v1/predictions/history`, {
     headers: { Authorization: `Bearer ${token}` },
   })
@@ -136,10 +139,32 @@ async function getPredictionHistory() {
       throw new Error('Session expired. Please login again.')
     }
     const errorBody = await response.json().catch(() => ({}))
-    throw new Error(errorBody.detail || 'Failed to fetch prediction history')
+    throw new Error(extractApiError(errorBody, 'Failed to fetch prediction history'))
   }
 
   return response.json()
+}
+
+
+/**
+ * Extracts a human-readable error message from a FastAPI error response body.
+ *
+ * FastAPI returns either:
+ *   { "detail": "Email already registered" }          ← string
+ *   { "detail": [{ "loc": [...], "msg": "..." }] }    ← Pydantic validation array
+ *
+ * We always resolve to a string so JSX never renders [object Object].
+ */
+function extractApiError(errorBody, fallback) {
+  const detail = errorBody?.detail
+  if (!detail) return fallback
+  if (typeof detail === 'string') return detail
+  if (Array.isArray(detail) && detail.length > 0) {
+    // Pydantic v2 format: each item has a "msg" field
+    const firstMsg = detail[0]?.msg
+    if (typeof firstMsg === 'string') return firstMsg
+  }
+  return fallback
 }
 
 async function loginUser(payload) {
@@ -151,7 +176,7 @@ async function loginUser(payload) {
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}))
-    throw new Error(errorBody.detail || 'Login failed')
+    throw new Error(extractApiError(errorBody, 'Login failed'))
   }
 
   return response.json()
@@ -166,11 +191,12 @@ async function registerUser(payload) {
 
   if (!response.ok) {
     const errorBody = await response.json().catch(() => ({}))
-    throw new Error(errorBody.detail || 'Registration failed')
+    throw new Error(extractApiError(errorBody, 'Registration failed'))
   }
 
   return response.json()
 }
+
 
 async function generateReport(payload) {
   const token = getStoredToken()

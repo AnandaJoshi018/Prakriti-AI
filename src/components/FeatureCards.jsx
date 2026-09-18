@@ -199,7 +199,7 @@ function LearnEcosystem() {
 
           <div className="grid gap-5 sm:grid-cols-2">
             <article className="flex min-h-[160px] flex-col justify-center rounded-[28px] bg-pa-gold p-6 text-pa-green-2 shadow-sm">
-              <p className="font-serif text-5xl font-bold">98%</p>
+              <p className="font-serif text-5xl font-bold">88.74%</p>
               <p className="mt-2 font-sans text-[11px] font-bold uppercase tracking-[0.18em] text-pa-green-2/80">
                 Accuracy Rate
               </p>

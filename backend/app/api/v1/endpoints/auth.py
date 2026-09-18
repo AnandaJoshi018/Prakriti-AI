@@ -15,11 +15,11 @@ from app.schemas.auth import TokenResponse, UserLogin, UserRegister, UserRespons
 router = APIRouter()
 
 
-@router.post("/register", response_model=UserResponse, status_code=201)
+@router.post("/register", response_model=TokenResponse, status_code=201)
 async def register(
     payload: UserRegister,
     db: Annotated[AsyncSession, Depends(get_db)],
-) -> User:
+) -> TokenResponse:
     existing = await db.execute(select(User).where(User.email == payload.email))
     if existing.scalar_one_or_none():
         raise AppError("Email already registered", status_code=409)
@@ -32,7 +32,10 @@ async def register(
     db.add(user)
     await db.flush()
     await db.refresh(user)
-    return user
+
+    # Issue JWT immediately so the frontend can authenticate without a second login step.
+    token = create_access_token(user.email)
+    return TokenResponse(access_token=token)
 
 
 @router.post("/login", response_model=TokenResponse)

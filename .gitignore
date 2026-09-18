@@ -41,4 +41,10 @@ __pycache__/
 *.db
 *.sqlite
 *.sqlite3
+*.corrupt_backup
 
+# Local Yoga video files — served from Cloudinary, do not commit large MP4s
+public/Yoga-Videos/
+
+# Backend secrets — belt-and-suspenders on top of backend/.gitignore
+backend/.env

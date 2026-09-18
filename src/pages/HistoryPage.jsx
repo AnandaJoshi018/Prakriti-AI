@@ -19,13 +19,21 @@ export default function HistoryPage() {
         const data = await getPredictionHistory()
         setHistory(data)
       } catch (err) {
-        setError(err.message || 'Failed to load history. Please try again.')
+        const msg = err.message || 'Failed to load history. Please try again.'
+        // Redirect to login on session expiry — mirrors DashboardPage behavior
+        if (msg.includes('Session expired') || msg.includes('401') || msg.includes('Unauthorized') || msg.includes('login again')) {
+          setError('Session expired. Redirecting to login...')
+          setTimeout(() => navigate('/login'), 1800)
+        } else {
+          setError(msg)
+        }
       } finally {
         setLoading(false)
       }
     }
     loadHistory()
-  }, [])
+  }, [navigate])
+
 
   const handleViewDetails = (item) => {
     localStorage.setItem('latest_prediction', JSON.stringify(item))
@@ -108,13 +116,12 @@ export default function HistoryPage() {
               <div className="mt-8 space-y-4 max-w-4xl">
                 {history.map((item) => {
                   const dateStr = item.created_at
-                    ? new Date(item.created_at).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })
+                    ? new Date(item.created_at).toLocaleDateString('en-IN', {
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+
+                    })
                     : 'N/A'
 
                   return (

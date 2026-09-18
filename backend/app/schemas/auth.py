@@ -23,5 +23,7 @@ class UserResponse(BaseModel):
     id: int
     email: EmailStr
     full_name: str
+    access_token: str | None = None
+    token_type: str | None = None
 
     model_config = {"from_attributes": True}

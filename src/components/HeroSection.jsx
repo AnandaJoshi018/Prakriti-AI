@@ -153,12 +153,7 @@ export default function HeroSection({ variant = 'home' }) {
           </Link>
         </div>
         <div className="mt-8 grid max-w-md grid-cols-2 gap-6 border-t border-black/5 pt-6">
-          <div>
-            <p className="font-serif text-3xl font-semibold text-pa-green md:text-[2.3rem]">100k+</p>
-            <p className="mt-1 font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-[#6f7f6f]">
-              Prakriti Profiles
-            </p>
-          </div>
+
           <div>
             <p className="font-serif text-3xl font-semibold text-pa-green md:text-[2.3rem]">88.74%</p>
             <p className="mt-1 font-sans text-[10px] font-bold uppercase tracking-[0.16em] text-[#6f7f6f]">
