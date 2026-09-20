@@ -31,7 +31,7 @@ class Settings(BaseSettings):
 
     api_v1_prefix: str = "/api/v1"
     docs_enabled: bool = True
-    cors_origins: str = "http://localhost:5173"
+    cors_origins: str = "http://localhost:5173,https://prakriti-ai-nu.vercel.app"
 
     database_url: str = "sqlite:///./prakriti_ai.db"
     jwt_secret_key: str | None = None
