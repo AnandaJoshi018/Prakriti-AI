@@ -1,5 +1,6 @@
 """FastAPI application factory."""
 
+import asyncio
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -24,7 +25,7 @@ async def lifespan(_app: FastAPI):
 
     manager = get_model_manager()
     try:
-        manager.load()
+        await asyncio.to_thread(manager.load)
         logger.info("ML model artifacts loaded successfully")
     except Exception as exc:
         logger.warning("ML model not loaded at startup: %s", exc)
