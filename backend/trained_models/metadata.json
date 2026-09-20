@@ -1,0 +1,55 @@
+{
+  "accuracy": 88.74,
+  "classification_report": {
+    "Kapha": {
+      "precision": 0.912,
+      "recall": 0.8883116883116883,
+      "f1-score": 0.9,
+      "support": 385.0
+    },
+    "Pitta": {
+      "precision": 0.8954423592493298,
+      "recall": 0.8675324675324675,
+      "f1-score": 0.8812664907651715,
+      "support": 385.0
+    },
+    "Vata": {
+      "precision": 0.8574938574938575,
+      "recall": 0.9064935064935065,
+      "f1-score": 0.8813131313131313,
+      "support": 385.0
+    },
+    "accuracy": 0.8874458874458875,
+    "macro avg": {
+      "precision": 0.8883120722477291,
+      "recall": 0.8874458874458874,
+      "f1-score": 0.8875265406927676,
+      "support": 1155.0
+    },
+    "weighted avg": {
+      "precision": 0.888312072247729,
+      "recall": 0.8874458874458875,
+      "f1-score": 0.8875265406927677,
+      "support": 1155.0
+    }
+  },
+  "train_samples": 4620,
+  "test_samples": 1155,
+  "cleaned_rows": 4407,
+  "balanced_rows": 5775,
+  "class_distribution": {
+    "Pitta": 1925,
+    "Kapha": 1925,
+    "Vata": 1925
+  },
+  "model_type": "LinearSVC + CalibratedClassifierCV",
+  "vectorizer": {
+    "stop_words": "english",
+    "ngram_range": [
+      1,
+      2
+    ],
+    "max_features": 5000,
+    "sublinear_tf": true
+  }
+}
