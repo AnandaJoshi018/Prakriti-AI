@@ -37,6 +37,7 @@ class Settings(BaseSettings):
     jwt_secret_key: str | None = None
     jwt_algorithm: str = "HS256"
     access_token_expire_minutes: int = Field(default=60, ge=1, le=43_200)
+    google_client_id: str | None = None
 
     dataset_dir: Path = Path("datasets")
     model_dir: Path = Path("trained_models")

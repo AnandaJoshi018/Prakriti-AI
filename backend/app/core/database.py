@@ -42,6 +42,11 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 
 async def init_db() -> None:
+    # Only use auto-creation and ad-hoc migrations for SQLite (local dev).
+    # PostgreSQL production deployments MUST use Alembic instead.
+    if engine.name != "sqlite":
+        return
+
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
         try:

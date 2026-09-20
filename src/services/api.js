@@ -197,6 +197,21 @@ async function registerUser(payload) {
   return response.json()
 }
 
+async function loginWithGoogle(accessToken) {
+  const response = await fetch(`${API_BASE_URL}/api/v1/auth/google`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ access_token: accessToken }),
+  })
+
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}))
+    throw new Error(extractApiError(errorBody, 'Google sign-in failed'))
+  }
+
+  return response.json()
+}
+
 
 async function generateReport(payload) {
   const token = getStoredToken()
@@ -240,4 +255,4 @@ async function downloadReport(downloadUrl) {
   window.URL.revokeObjectURL(objectUrl)
 }
 
-export { API_BASE_URL, buildPredictionPayload, clearStoredToken, createPrediction, downloadReport, generateReport, loginUser, registerUser, setStoredToken, uploadPrescription, listPredictions, getCurrentUser, getPredictionHistory }
+export { API_BASE_URL, buildPredictionPayload, clearStoredToken, createPrediction, downloadReport, generateReport, loginUser, loginWithGoogle, registerUser, setStoredToken, uploadPrescription, listPredictions, getCurrentUser, getPredictionHistory }

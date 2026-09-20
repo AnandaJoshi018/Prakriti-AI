@@ -14,6 +14,11 @@ class UserLogin(BaseModel):
     password: str
 
 
+class GoogleLoginRequest(BaseModel):
+    # The Google OAuth access token returned by useGoogleLogin (implicit flow)
+    access_token: str
+
+
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"

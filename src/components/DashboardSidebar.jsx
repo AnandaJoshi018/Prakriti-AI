@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { LayoutGrid, PlusSquare, BarChart3, Leaf, Sparkles, X, History } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { LayoutGrid, PlusSquare, BarChart3, Leaf, Sparkles, X, History, LogOut } from 'lucide-react'
 import AyurvedaChatbot from './AyurvedaChatbot.jsx'
+import { clearStoredToken } from '../services/api.js'
 
 const items = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutGrid, key: 'dashboard' },
@@ -14,6 +15,13 @@ const items = [
 export default function DashboardSidebar({ active = 'dashboard', consultVariant = 'gold', isOpen = false, onClose }) {
   const resolvedActive = active
   const [isChatOpen, setIsChatOpen] = useState(false)
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    clearStoredToken()
+    if (onClose) onClose()
+    navigate('/login')
+  }
 
   return (
     <>
@@ -83,7 +91,28 @@ export default function DashboardSidebar({ active = 'dashboard', consultVariant 
         </nav>
 
         <div className="mt-auto">
-          {/* Desktop/Mobile button */}
+          {/* Logout — Desktop/Mobile full-width */}
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="mb-2 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 font-sans text-sm font-semibold text-[#8a6a6a] transition hover:bg-[#f5eeee] md:hidden lg:flex md:justify-center lg:justify-start cursor-pointer"
+            title="Logout"
+          >
+            <LogOut className="h-5 w-5 shrink-0" strokeWidth={1.75} />
+            <span className="md:hidden lg:block">Logout</span>
+          </button>
+
+          {/* Logout — Tablet icon-only */}
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="mx-auto mb-2 hidden md:flex lg:hidden h-11 w-11 items-center justify-center rounded-xl text-[#8a6a6a] transition hover:bg-[#f5eeee] cursor-pointer"
+            title="Logout"
+          >
+            <LogOut className="h-5 w-5" strokeWidth={1.75} />
+          </button>
+
+          {/* Desktop/Mobile AI Consult button */}
           <button
             type="button"
             onClick={() => {
@@ -98,7 +127,7 @@ export default function DashboardSidebar({ active = 'dashboard', consultVariant 
             <span>AI Consult</span>
           </button>
 
-          {/* Tablet collapsed button */}
+          {/* Tablet collapsed AI Consult button */}
           <button
             type="button"
             onClick={() => {
@@ -119,3 +148,4 @@ export default function DashboardSidebar({ active = 'dashboard', consultVariant 
     </>
   )
 }
+

@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { User, Mail, Lock, ShieldCheck, Apple } from 'lucide-react'
-import { registerUser, setStoredToken } from '../services/api.js'
+import { useGoogleLogin } from '@react-oauth/google'
+import { registerUser, loginWithGoogle, setStoredToken } from '../services/api.js'
 
 /**
  * Extracts a human-readable string from a backend API error response.
@@ -36,6 +37,7 @@ export default function SignupForm() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const navigate = useNavigate()
 
@@ -64,6 +66,26 @@ export default function SignupForm() {
       setIsSubmitting(false)
     }
   }
+
+  const handleGoogleSignup = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      setIsGoogleSubmitting(true)
+      setErrorMessage('')
+      try {
+        // Same endpoint as Google login — backend finds or creates the user
+        const response = await loginWithGoogle(tokenResponse.access_token)
+        setStoredToken(response.access_token)
+        navigate('/dashboard')
+      } catch (error) {
+        setErrorMessage(error.message || 'Google sign-in failed. Please try again.')
+      } finally {
+        setIsGoogleSubmitting(false)
+      }
+    },
+    onError: () => {
+      setErrorMessage('Google sign-in was cancelled or failed. Please try again.')
+    },
+  })
 
   return (
     <div className="w-full max-w-[430px] rounded-[28px] border border-black/5 bg-white px-5 py-5 shadow-[0_24px_80px_rgba(0,0,0,0.07)] sm:px-6 sm:py-5 md:px-7 md:py-6 lg:max-w-[420px]">
@@ -159,11 +181,12 @@ export default function SignupForm() {
       </div>
 
       <div className="grid grid-cols-2 gap-3">
-        {/* Google — no OAuth configured; button is UI-ready for future integration */}
+        {/* Google — wired to useGoogleLogin; backend finds or creates the user */}
         <button
           type="button"
-          className="flex items-center justify-center gap-2 rounded-xl border border-black/10 bg-pa-signup-input py-2 sm:py-2.5 font-sans text-sm font-semibold text-[#2a2a2a] transition hover:bg-[#e4e2d4]"
-          title="Google sign-in (OAuth not yet configured)"
+          onClick={() => handleGoogleSignup()}
+          disabled={isGoogleSubmitting || isSubmitting}
+          className="flex items-center justify-center gap-2 rounded-xl border border-black/10 bg-pa-signup-input py-2 sm:py-2.5 font-sans text-sm font-semibold text-[#2a2a2a] transition hover:bg-[#e4e2d4] disabled:cursor-not-allowed disabled:opacity-70"
         >
           {/* Official Google G logo SVG */}
           <svg className="h-4 w-4" viewBox="0 0 24 24" aria-hidden="true">
@@ -184,7 +207,7 @@ export default function SignupForm() {
               fill="#EA4335"
             />
           </svg>
-          Google
+          {isGoogleSubmitting ? 'Signing in...' : 'Google'}
         </button>
 
         {/* Apple — no OAuth configured; button is UI-ready for future integration */}
